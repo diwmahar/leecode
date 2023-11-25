@@ -1,0 +1,85 @@
+
+Solution - 66 plus one
+
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+     for (let i = digits.length - 1; i >=0; i--){
+         if(digits[i] < 9){
+             digits[i]  = digits[i] + 1;
+             return digits;
+         }
+         else{
+             digits[i] = 0;
+         }
+     }
+     digits.unshift(1);
+     return digits;
+};
+
+
+
+Merge Sorted Array
+
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function(nums1, m, nums2, n) {
+    let first = m-1;
+    let second = n-1;
+    let i = m + n - 1;
+
+    while(second >= 0){
+        let fVal = nums1[first];
+        let sVal = nums2[second];
+
+        if(fVal > sVal){
+            nums1[i] =fVal;
+            i--;
+            first--;
+        }
+        else{
+            nums1[i] = sVal;
+            i--;
+            second--;
+        }
+    }
+};
+
+
+111. Minimum Depth of Binary Tree
+
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function(root) {
+    if(root == null){
+        return 0;
+    }
+
+    let leftDepth = minDepth(root.left);
+    let rightDepth = minDepth(root.right);
+
+    if(leftDepth == 0 || rightDepth == 0){
+        return Math.max(leftDepth,rightDepth) + 1;
+    }
+    else{
+        return Math.min(leftDepth,rightDepth) + 1
+    }
+};
